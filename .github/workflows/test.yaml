@@ -6,19 +6,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: List files and display message
-        run: |
-          echo "Welcome to the test workflow!"
-          ls -la
-          cat README.md
 
-      - name: Install cowsay
-        run: sudo apt-get update && sudo apt-get install -y cowsay
+      - name: list files
+        run: ls -la
 
-      - name: Generate ASCII artwork
-        run: cowsay -f dragon "Hello, World!" >> output.txt
+      - name: execute shell script
+        run: ./asciiscripts.sh
+
+
+
 
 
 
