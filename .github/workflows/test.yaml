@@ -1,11 +1,12 @@
 name: Test Workflow
 on: push
 jobs:
- - name: test-githubaction_workflow
-   runs-on: ubuntu-latest
-   steps:
-     - name: Checkout code
-       uses: actions/checkout@v2
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
 
 
 
