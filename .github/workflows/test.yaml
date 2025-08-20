@@ -2,7 +2,7 @@ name: Test Workflow
 on: push
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -15,7 +15,11 @@ jobs:
         run: |
           chmod +x .github/asciiscripts.sh
           ./.github/asciiscripts.sh
-
+      - name: upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: script-output
+          path: dragon_output.txt
   dev:
     runs-on: ubuntu-latest
     steps:
@@ -26,6 +30,11 @@ jobs:
         run: |
           chmod +x .github/asciiscripts.sh
           ./.github/asciiscripts.sh
+      - name: downlaod artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: script-output
+          path: dragon_output.t
 
   prod:
     runs-on: ubuntu-latest
@@ -38,6 +47,10 @@ jobs:
           chmod +x .github/asciiscripts.sh
           ./.github/asciiscripts.sh
 
+      - name: downlaod artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: script-output
 
 
 
