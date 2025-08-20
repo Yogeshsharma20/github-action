@@ -1,56 +1,58 @@
 name: Test Workflow
 on: push
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: list files
+      - name: List files
         run: ls -la
 
-      - name: execute shell script
+      - name: Execute shell script
         run: |
           chmod +x .github/asciiscripts.sh
           ./.github/asciiscripts.sh
-      - name: upload artifact
-        uses: actions/upload-artifact@v3
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
           name: script-output
           path: dragon_output.txt
+
   dev:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: execute shell script
-        run: |
-          chmod +x .github/asciiscripts.sh
-          ./.github/asciiscripts.sh
-      - name: downlaod artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: script-output
-          path: dragon_output.t
-
-  prod:
-    runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: execute shell script
-        run: |
-          chmod +x .github/asciiscripts.sh
-          ./.github/asciiscripts.sh
-
-      - name: downlaod artifact
+      - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: script-output
+          path: dragon_output
+
+      - name: Show downloaded artifact
+        run: ls -la dragon_output
+
+  prod:
+    runs-on: ubuntu-latest
+    needs: dev
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: script-output
+          path: dragon_output
+
+      - name: Show downloaded artifact
+        run: ls -la dragon_output
+
 
 
 
