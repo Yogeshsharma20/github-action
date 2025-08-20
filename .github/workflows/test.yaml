@@ -13,7 +13,9 @@ jobs:
         run: ls -la
 
       - name: execute shell script
-        run: ./asciiscripts.sh
+        run: | 
+          chmod +x ./asciiscripts.sh
+          ./asciiscripts.sh
 
 
 
