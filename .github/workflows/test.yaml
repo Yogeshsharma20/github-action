@@ -1,19 +1,25 @@
 name: Test Workflow
 on: push
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Listfiles and display message
-      run: |
-        echo "Welcome to the test workflow!"
-        ls -la
-        cat README.md
-    - name: Generate ASCII artwork
-      run: cowsay -f dragon "Hello, World!" >> output.txt
+      - name: List files and display message
+        run: |
+          echo "Welcome to the test workflow!"
+          ls -la
+          cat README.md
+
+      - name: Install cowsay
+        run: sudo apt-get update && sudo apt-get install -y cowsay
+
+      - name: Generate ASCII artwork
+        run: cowsay -f dragon "Hello, World!" >> output.txt
+
 
 
 
