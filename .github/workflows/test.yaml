@@ -31,7 +31,7 @@ jobs:
           chmod +x .github/asciiscripts.sh
           ./.github/asciiscripts.sh
       - name: downlaod artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: script-output
           path: dragon_output.t
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: execute shell script
         run: |
@@ -48,7 +48,7 @@ jobs:
           ./.github/asciiscripts.sh
 
       - name: downlaod artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: script-output
 
